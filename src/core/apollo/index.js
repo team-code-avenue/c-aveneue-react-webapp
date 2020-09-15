@@ -9,7 +9,7 @@ import {
   queryOrMutationLink,
   requestLink,
   subscriptionLink
-} from "core/apollo/links";
+} from "./links";
 
 const createClient = dispatch => {
   const cache = new InMemoryCache();
@@ -29,6 +29,11 @@ const createClient = dispatch => {
     connectToDevTools: true,
     queryDeduplication: true
   });
+
+  // here we're initializing the cache with the data from the server's cache
+  /* if (window.__APOLLO_STATE__) {
+    cache.restore(window.__APOLLO_STATE__);
+  } */
 
   return client;
 };
